@@ -149,7 +149,7 @@ class App extends React.Component {
                         <div style={{width: '100%', height: '2px', backgroundColor: 'grey', position: 'absolute', top: '200px'}}></div>
                         <div style={{width: '15px', height: '150px', backgroundColor: 'black', position: 'absolute', top: '280px', right: '20px', borderRadius: '45px'}}></div>
                     </div>
-                    <BeerList className="hidden content" toggleModal={this.toggleModal.bind(this)} delBeer={this.delBeer.bind(this)} like={this.like.bind(this)} dislike={this.dislike.bind(this)} beer={beer_list} ></BeerList>
+                    <BeerList className="hidden content" delBeer={this.delBeer.bind(this)} like={this.like.bind(this)} dislike={this.dislike.bind(this)} beer={beer_list} ></BeerList>
                 </div>
             </div>
         );
