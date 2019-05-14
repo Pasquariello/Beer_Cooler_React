@@ -1,36 +1,25 @@
 import React from 'react';
 import BeerCard from './BeerCard';
 
-//const BeerList = (props) => {
-class BeerList extends React.Component {
-
-    constructor(props){
-        super(props);
-        this.state = {
-            display: false
-        };
-
-  
-    }
-
-    render() {
+const BeerList = (props) => {
         return (
-      
-            <div style={{overflow: "auto", height: "100%"}} className="ui segment stackable equal width centered grid container"> 
-                
-                {this.props.beer.map((beer, index) => {
+            <div className="ui stackable equal width centered grid container" style={{marginTop: '50px'}} >     
+                {props.beer.map((beer, index) => {
                     return (     
-                                <div style={{margin: '10px'}}>
-                                    <BeerCard toggleModal={this.props.toggleModal} delBeer={this.props.delBeer} like={this.props.like} dislike={this.props.dislike} beer={beer}></BeerCard>
-                                </div>    
+                        <div style={{margin: '10px'}} key={index}>
+                            <BeerCard 
+                                delBeer={props.delBeer} 
+                                like={props.like} 
+                                dislike={props.dislike} 
+                                beer={beer}
+                            />
+                        </div>    
                     );
    
                 })};
         
             </div>
-            
         );
-    }
 }
 
 export default BeerList;
