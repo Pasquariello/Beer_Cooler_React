@@ -4,12 +4,8 @@ import axios from 'axios';
 import BeerList from './components/BeerList';
 import Header from './components/layout/Header';
 
-
 //TODO: 
-    //add try catch to all axios requests
-    //clean voteCalculator
     //double space all functions
-    //break up components
     //clean jsx
 
 class App extends React.Component {
@@ -31,7 +27,6 @@ class App extends React.Component {
 
     displayTimer() {
         this.setState({showSuccess: true})
-
         setTimeout(
             function() {
                 this.setState({showSuccess: false})
@@ -39,14 +34,17 @@ class App extends React.Component {
             .bind(this),
             2000
         );
-        
-}
+    }
+
 
     getAllBeer() {
         axios.get("/v1/beer/")
         .then(res => {
             this.setState({beer_list: res.data})
-            console.log(res.data)
+        })
+        .catch(error => {
+            console.log(error)
+            this.setState({errMsg: 'Cooler out of order, unable to get beer. PANIC!'})
         });
     }
 
@@ -68,20 +66,25 @@ class App extends React.Component {
             this.getAllBeer();
             this.displayTimer();
 
-        });
+        })
+        .catch(error => {
+            console.log(error)
+            this.setState({errMsg: 'There was a problem adding your new beer'})
+          });
     }
 
 
     delBeer(id) {
-        
         axios.delete(`/v1/beer/${id}`)
         .then(res => {
-            console.log(res);
-            console.log(res.data);
             this.setState({ beer_list:[...this.state.beer_list.filter(beer => beer.id !== id)] })
-
+        }) 
+        .catch(error => {
+            console.log(error)
+            this.setState({errMsg: 'There was a problem drinking your beer!'})
         });
     }
+
 
     like(id, e) {
         e.preventDefault()
@@ -94,11 +97,12 @@ class App extends React.Component {
 
         axios.put(`/v1/beer/${id}`, {likes})
         .then(res => {
-            console.log(res);
-            console.log(res.data);
-            //set state with cloned list due to immutibility
             this.setState({beer_list: beer_list_clone});
         })
+        .catch(error => {
+            console.log(error)
+            this.setState({errMsg: 'There was a problem liking the beer!'})
+        });
     }
 
 
@@ -113,35 +117,19 @@ class App extends React.Component {
 
         axios.put(`/v1/beer/${id}`, {likes})
         .then(res => {
-            console.log(res);
-            console.log(res.data);
-            //set state with cloned list due to immutibility
             this.setState({beer_list: beer_list_clone});
         })
-    }
-
-
-    voteCalculator(id, action) {
- 
-        let beer_list_clone = [...this.state.beer_list];
-        let index = beer_list_clone.findIndex(obj => obj.id === id);
-
-        if(action === 'increment') {
-            beer_list_clone[index].likes++
-
-        } else {
-            beer_list_clone[index].likes--
-        }
-
-        let likes = beer_list_clone[index].likes;
-        
-        return likes;
+        .catch(error => {
+            console.log(error)
+            this.setState({errMsg: 'There was a problem disliking the beer!'})
+          });
     }
 
 
     render() {
-        const beer_list = this.state.beer_list
-        
+        let {beer_list, errMsg} = this.state;
+       
+
         return (
             <div>
                 <Header 
@@ -149,9 +137,11 @@ class App extends React.Component {
                     addBeer={this.postBeer.bind(this)}
                     showSuccess={this.state.showSuccess}
                 />
-                        
+                
+                {errMsg && <h3 style={{color: 'red', textAlign: 'center'}}>{errMsg}</h3>}
+
                 <BeerList 
-                    className="hidden content" 
+                    className="content" 
                     delBeer={this.delBeer.bind(this)} 
                     like={this.like.bind(this)} 
                     dislike={this.dislike.bind(this)} 
@@ -161,6 +151,7 @@ class App extends React.Component {
         );
     }
 }
+
 
 ReactDOM.render(
     <App />, document.querySelector('#root')

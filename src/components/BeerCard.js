@@ -1,9 +1,7 @@
 import React from 'react';
 
-// const BeerCard = (props) => {  
+
 class BeerCard extends React.Component {
-
-
 
 
     render () {
@@ -13,12 +11,13 @@ class BeerCard extends React.Component {
         return (
             <div className="ui cards">
                 <div className="card">
+
                     <div className="content">
                         <div className="header" style={{float: "left"}}>
                             {name}
                         </div>
-                     
                     </div>
+
                     <div className="extra content">
 
                             <i style={{marginRight: "5px" }} className={likes > 0 ? "fas fa-thumbs-up" : "fas fa-thumbs-down"}></i>
@@ -26,6 +25,7 @@ class BeerCard extends React.Component {
                              / 
                              <a style={{margin: "5px"}} href="/" onClick={dislike.bind(this, id)}>dislike</a>
                     </div>
+                    
                     <div className="extra content">
                         <div onClick={this.props.delBeer.bind(this, id)} className="ui animated inverted green button" tabindex="0">
                             <div className="visible content">Drink</div>
@@ -34,11 +34,13 @@ class BeerCard extends React.Component {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         );
     }
 }
+
 
 export default BeerCard;
 
