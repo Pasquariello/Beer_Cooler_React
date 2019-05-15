@@ -15,8 +15,17 @@ function Header(props) {
 
 
 const SuccessMsg = () => (
-    <p style={{color: '#00FF00'}}>Succesfully Added to the Fridge!</p>     
+    <div style={successMsgStyle}><p>Succesfully Added to the Fridge!</p></div>    
 )
+
+
+const successMsgStyle = {
+    color: '#00FF00',
+    position: 'absolute',
+    left: '0',
+    right: '0',
+    width: '100%'
+}
 
 
 const headerStyle = {
