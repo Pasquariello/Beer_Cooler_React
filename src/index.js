@@ -45,10 +45,7 @@ class App extends React.Component {
         });
     }
 
-
-    getSingleBeer() {}
-
-
+    
     postBeer(beer_name) {
 
         const new_beer = {
