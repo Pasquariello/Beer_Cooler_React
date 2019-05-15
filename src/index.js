@@ -4,9 +4,6 @@ import axios from 'axios';
 import BeerList from './components/BeerList';
 import Header from './components/layout/Header';
 
-//TODO: 
-    //double space all functions
-    //clean jsx
 
 class App extends React.Component {
     constructor(props){
