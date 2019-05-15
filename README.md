@@ -1,3 +1,6 @@
+## Application Instructions: 
+"Using React, write a simple front end web application to display beers in the cooler, allow adding new ones, and changing the number of likes in a beer."
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
