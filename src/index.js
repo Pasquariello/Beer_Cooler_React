@@ -126,7 +126,6 @@ class App extends React.Component {
     render() {
         let {beer_list, errMsg} = this.state;
        
-
         return (
             <div>
                 <Header 
